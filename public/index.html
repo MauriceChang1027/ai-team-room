@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>圓桌 · 我的 AI 團隊</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/mobile.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="圓桌首頁"><span class="brand-icon">◌</span><span>圓桌<small>YOUR AI TEAM</small></span></a>
+    <div class="room-card"><span class="room-icon">✳</span><div><strong>我的 AI 工作室</strong><span>一個要求，整隊協作</span></div><span class="room-dot"></span></div>
+    <div class="section-label">團隊成員 <span>5</span></div>
+    <nav id="members" class="members" aria-label="團隊成員"></nav>
+    <div class="sidebar-bottom">
+      <div class="local-label"><span class="green-dot"></span>只在這部電腦運作</div>
+      <p>使用你的 ChatGPT 訂閱額度。<br>無需 API key，無額外 API 費。</p>
+      <button id="help-toggle" class="quiet-button">使用說明 ↗</button>
+    </div>
+  </aside>
+  <main>
+    <header class="topbar"><div><div class="eyebrow">TEAM ROOM</div><h1>團隊群組 <span class="tag">本機版</span></h1></div><div class="header-actions"><button id="help-open" class="icon-button" title="使用說明" aria-label="使用說明">?</button><button id="export" class="outline-button">匯出對話 ↓</button><button id="clear" class="icon-button" title="清空對話" aria-label="清空對話">↺</button></div></header>
+    <div class="connection"><div><span id="connection-dot" class="status-dot"></span><span id="connection-text">正在檢查登入狀態…</span></div><span class="allowance">共用 Plus / Codex 額度</span></div>
+    <section id="help" class="help-panel" hidden>
+      <div class="help-head"><strong>讓團隊開始工作</strong><button id="help-close" class="icon-button" aria-label="關閉說明">×</button></div>
+      <p>輸入任務並選「全隊輪流」，研究員 → 策劃員 → 執行員 → 審核員 → 主管會依次回覆。選「指定成員」可只請一位跟進。</p>
+      <p>每位成員會收到群組最近的內容；長對話會截取最近內容以控制用量。每次全隊討論最多五次 AI 回覆，需保持電腦及服務開啟。</p>
+      <p>執行員可完成文稿、分析及程式內容，成果可匯出。此版本不會自行操作你的其他軟件或發布內容。訊息保存在本機，AI 處理時會送到 OpenAI。</p>
+      <p>若未登入，請在終端機輸入 <code>codex login</code>，用你的 ChatGPT 帳戶登入，再按「重新檢查」。若未有 Codex，先安裝官方 Codex；啟動器會自動尋找桌面版附帶的版本。</p>
+      <button id="recheck" class="outline-button">重新檢查登入</button>
+    </section>
+    <section id="feed" class="feed" aria-label="群組對話" aria-live="polite" aria-relevant="additions text">
+      <div id="welcome" class="welcome"><div class="welcome-mark">✳</div><div class="eyebrow">A LITTLE TEAM. A BIGGER PERSPECTIVE.</div><h2>你的想法，交給團隊一起完成。</h2><p>研究、規劃、執行、審核，再由主管整合。<br>說出你想完成的事，看他們輪流接棒。</p>
+        <div class="examples"><button data-example="幫我規劃一個零額外開支的個人知識管理方法，並製作可直接使用的每週整理範本。"><span>↗</span>整理我的想法<small>建立方法，交付可用範本</small></button><button data-example="幫我寫一篇介紹 AI 團隊協作的繁體中文社交貼文，研究概念、規劃結構、完成文稿，再檢查準確性。"><span>✎</span>一起完成文稿<small>從資料到最後一版</small></button><button data-example="請用簡短內容驗證團隊輪流發言：研究員提出一項事實，策劃員安排一個步驟，執行員完成一句歡迎詞，審核員檢查，主管總結。每人最多兩句，不用工具。"><span>◌</span>先試一輪<small>短篇回覆，也會使用訂閱額度</small></button></div>
+      </div>
+      <div id="messages" class="messages"></div>
+      <div id="activity" class="activity" hidden><span class="typing"><i></i><i></i><i></i></span><span id="activity-text">團隊正在工作…</span></div>
+    </section>
+    <div class="composer-wrap"><div id="notice" class="notice" role="status" hidden></div><form id="composer" class="composer">
+      <label class="sr-only" for="prompt">輸入給團隊的要求</label><textarea id="prompt" maxlength="12000" rows="2" placeholder="告訴團隊，你想完成甚麼？"></textarea>
+      <div class="composer-footer"><div class="routing"><label class="sr-only" for="mode">回覆方式</label><select id="mode"><option value="team">✳ 全隊輪流</option><option value="single">指定成員</option></select><label class="sr-only" for="role">指定成員</label><select id="role" hidden></select></div><div class="send-actions"><span id="character-count" class="character-count">Enter 傳送 · Shift + Enter 換行</span><button id="stop" type="button" class="stop-button" hidden>■ 停止</button><button id="send" class="send-button" type="submit" disabled>開始協作 <span>↑</span></button></div></div>
+    </form><p class="footer-note">每個角色為獨立 AI 工作階段，同用一份訂閱。AI 可能出錯，請核實重要內容。</p></div>
+  </main>
+</body>
+</html>

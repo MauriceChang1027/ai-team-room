@@ -1,0 +1,12 @@
+# Conversation data, runtime logs and credentials
+data/
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+.codex/
+auth.json
+node_modules/
+.DS_Store
+Thumbs.db
